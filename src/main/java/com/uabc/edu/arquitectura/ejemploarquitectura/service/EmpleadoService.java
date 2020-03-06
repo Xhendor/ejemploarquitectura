@@ -25,4 +25,14 @@ public class EmpleadoService {
 
         return repo.findById(id);
     }
+
+    public void saveEmpleado(Empleado emp){
+
+        repo.save(emp);
+    }
+
+    public void deleteEmpleado(Integer id){
+
+        repo.deleteById(id);
+    }
 }

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.Consumes;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,12 +27,39 @@ public class EmpleadoController {
                 empleadoService.getEmpleados(),
                 HttpStatus.OK);
     }
-    @GetMapping("empleado/{id}")
+    @GetMapping("empleado/get/{id}")
     @ResponseBody
-    public ResponseEntity<Optional<Empleado>> getEmpleado(@PathVariable("id")  Integer id){
+    public ResponseEntity<Optional<Empleado>> getEmpleado(
+            @PathVariable("id")  Integer id){
 
         return new ResponseEntity<Optional<Empleado>>(
                 empleadoService.getEmpleadoById(id),
                 HttpStatus.OK);
     }
+
+    @GetMapping("empleado/delete/{id}")
+    @ResponseBody
+    public ResponseEntity<String> deleteEmpleado(
+            @PathVariable("id")  Integer id){
+
+            empleadoService.deleteEmpleado(id);
+
+            return new ResponseEntity<String>
+                    ("Todo fine",
+                    HttpStatus.OK);
+    }
+
+    @PostMapping(name = "empleado/save")
+    public ResponseEntity<String> saveEmpleado(
+            @RequestBody Empleado emp){
+
+        empleadoService.saveEmpleado(emp);
+
+        return new ResponseEntity<String>
+                ("Todo fine",
+                        HttpStatus.OK);
+    }
+
+
+
 }
